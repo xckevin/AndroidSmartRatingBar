@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SmartRatingBar">
+        <attr name="maxRating" format="integer" />
+        <attr name="gap" format="dimension" />
+         <attr name="rating" format="float" />
+        <attr name="orientation" format="integer">
+            <enum name="vertical" value="1" />
+            <enum name="horizontal" value="0" />
+        </attr>
+        <attr name="ratingDrawable" format="reference" />
+        <attr name="backgroundDrawable" format="reference" />
+        <attr name="indicator" format="boolean" />
+    </declare-styleable>
+</resources>
