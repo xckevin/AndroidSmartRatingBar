@@ -123,10 +123,12 @@ public class SmartRatingBar extends View {
     }
 
     @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return mIndicator;
+    }
+
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (mIndicator) {
-            return super.onTouchEvent(event);
-        }
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (mOrientation == LinearLayout.HORIZONTAL) {
@@ -153,6 +155,11 @@ public class SmartRatingBar extends View {
             default:
                 return super.onTouchEvent(event);
         }
+    }
+
+    @Override
+    public boolean performClick() {
+        return super.performClick();
     }
 
     @Override
