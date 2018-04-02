@@ -158,15 +158,11 @@ public class SmartRatingBar extends View {
     }
 
     @Override
-    public boolean performClick() {
-        return super.performClick();
-    }
-
-    @Override
     protected Parcelable onSaveInstanceState() {
         Parcelable parcelable = super.onSaveInstanceState();
         SavedState ss = new SavedState(parcelable);
         ss.mRating = getRatingNum();
+        ss.mStarNum = getMaxStarNum();
         return ss;
     }
 
@@ -175,6 +171,7 @@ public class SmartRatingBar extends View {
         SavedState ss = (SavedState) state;
         super.onRestoreInstanceState(ss.getSuperState());
         setRatingNum(ss.getRating());
+        setMaxStarNum(ss.getStarNum());
     }
 
     @Override
@@ -316,6 +313,8 @@ public class SmartRatingBar extends View {
 
         float mRating;
 
+        int mStarNum;
+
         public float getRating() {
             return mRating;
         }
@@ -324,9 +323,18 @@ public class SmartRatingBar extends View {
             mRating = rating;
         }
 
+        public int getStarNum() {
+            return mStarNum;
+        }
+
+        public void setStarNum(int starNum) {
+            mStarNum = starNum;
+        }
+
         public SavedState(Parcel source) {
             super(source);
             mRating = source.readFloat();
+            mStarNum = source.readInt();
         }
 
         public SavedState(Parcelable superState) {
@@ -337,6 +345,7 @@ public class SmartRatingBar extends View {
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             out.writeFloat(mRating);
+            out.writeInt(mStarNum);
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR
