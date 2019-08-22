@@ -148,7 +148,7 @@ public class SmartRatingBar extends View {
                 }
                 return true;
             default:
-                return super.onTouchEvent(event);
+                return mIndicator;
         }
     }
 
