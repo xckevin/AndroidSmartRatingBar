@@ -124,7 +124,32 @@ public class SmartRatingBar extends View {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        return mIndicator;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (mOrientation == LinearLayout.HORIZONTAL) {
+                    final int drawableWidth = mRatingBackgroundDrawable.getBounds().width();
+                    float x = event.getX();
+                    float coverWidth = x - getPaddingLeft();
+                    int coverStarNum = (int) (coverWidth / (drawableWidth + mGapSize));
+                    float remainCoverWidth = coverWidth % (drawableWidth + mGapSize);
+                    float partStar = remainCoverWidth /drawableWidth;
+                    partStar = ((int) (partStar / mRatingStepSize)) / 10.0f;
+                    setRatingNum(coverStarNum + partStar);
+                } else {
+                    final int drawableHeight = mRatingBackgroundDrawable.getBounds().height();
+                    float y = event.getY();
+                    float coverHeight = y - getPaddingTop();
+                    int coverStarNum =
+                            (int) (coverHeight / (drawableHeight + mGapSize));
+                    float remainCoverHeight = coverHeight % (drawableHeight + mGapSize);
+                    float partStar = remainCoverHeight / drawableHeight;
+                    partStar = ((int) (partStar / mRatingStepSize)) / 10.0f;
+                    setRatingNum(coverStarNum + partStar);
+                }
+                return true;
+            default:
+                return super.onTouchEvent(event);
+        }
     }
 
     @Override
